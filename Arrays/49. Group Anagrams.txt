@@ -1,0 +1,63 @@
+49. Group Anagrams
+Medium
+Topics
+Companies
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+Explanation:
+
+There is no string in strs that can be rearranged to form "bat".
+The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
+Example 2:
+
+Input: strs = [""]
+
+Output: [[""]]
+
+Example 3:
+
+Input: strs = ["a"]
+
+Output: [["a"]]
+
+ 
+
+Constraints:
+
+1 <= strs.length <= 104
+0 <= strs[i].length <= 100
+strs[i] consists of lowercase English letters.
+
+
+Solution:- 
+
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        int n = strs.size();
+        vector<string> strs2;
+        strs2 = strs;
+        for(int i=0;i<n;i++){
+            sort(strs2[i].begin(), strs2[i].end());
+        }
+        unordered_map<string, vector<string>> mp;
+        for(int i=0;i<n;i++){
+            mp[strs2[i]].push_back(strs[i]);
+        }
+        vector<vector<string>> out;
+        for(auto x:mp){
+            out.push_back(x.second);
+        }
+        return out;
+    }
+};
